@@ -4,7 +4,8 @@ using namespace std;
 #define int long long
 int fx[4]={-1,0,1,0};
 int fy[4]={0,1,0,-1};
-char f[1001][1001];
+char s[1001][1001];
+int f[1001][1001];
 int d[1001][1001];
 int n;
 void bfs1(int x,int y){
@@ -18,7 +19,7 @@ void bfs1(int x,int y){
 		for(int i=0;i<4;i++){
 			int dx=xx+fx[i];
 			int dy=yy+fy[i];
-			if(d[dx][dy]!=0&&dx>=0&&dx<=n&&dy>=0&&dy<=n){
+			if(d[dx][dy]==1&&dx>=1&&dx<=n&&dy>=1&&dy<=n){
 				q.push({dx,dy});
 				d[dx][dy]=0;
 			}
@@ -36,7 +37,7 @@ void bfs2(int x,int y){
 		for(int i=0;i<4;i++){
 			int dx=xx+fx[i];
 			int dy=yy+fy[i];
-			if(f[dx][dy]!=0&&dx>=0&&dx<=n&&dy>=0&&dy<=n){
+			if(f[dx][dy]==1&&dx>=1&&dx<=n&&dy>=1&&dy<=n){
 				q.push({dx,dy});
 				f[dx][dy]=0;
 			}
@@ -47,8 +48,8 @@ signed main(){
 	cin>>n;
 	for(int i=1;i<=n;i++){
 		for(int j=1;j<=n;j++){
-			cin>>f[i][j];
-			if(f[i][j]=='.'){
+			cin>>s[i][j];
+			if(s[i][j]=='.'){
 				f[i][j]=0;
 			}
 			else f[i][j]=1;
@@ -57,7 +58,7 @@ signed main(){
 	}
 	for(int i=1;i<=n;i++){
 		for(int j=1;j<=n;j++){
-			if(f[i][j]==1&&f[i][j-1]==0||f[i-1][j]==0||f[i][j+1]==0||f[i+1][j]==0){
+			if(f[i][j]==1&&(f[i][j-1]==0||f[i-1][j]==0||f[i][j+1]==0||f[i+1][j]==0)){
 				f[i][j]=2;
 			}
 		}
