@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+#include <cstdlib>
+using namespace std;
+#define int long long
+struct place{
+	int u,v;
+};
+vector<int>e[100000];
+vector<place>s;
+queue<int>q;
+bool vis1[100001]={0},vis2[100001]={0}; 
+bool cmp(place x,place y){
+	if(x.v==y.v){
+		return x.u<y.u;
+	}
+	else return x.v<y.v;
+}
+void bfs(int x){
+	q.push(x);
+	cout<<x<<' ';
+	vis1[x]=1;
+	while(q.size()!=0){
+		int front=q.front();
+		for(int i=0;i<e[front].size();i++){
+			int point=s[e[front][i]].v;
+			if(vis1[point]==0){
+				q.push(point);
+				cout<<point<<' ';
+				vis1[point]=1;
+			}
+		}
+		q.pop();
+	}
+}
+void dfs(int x){
+	vis2[x]=1;
+	cout<<x<<' ';
+	for(int i=0;i<e[x].size();i++){
+		int point=s[e[x][i]].v;
+		if(!vis2[point]){
+			dfs(point);
+		}
+	}
+}
+signed main(){
+	int n,m;
+	cin>>n>>m;
+	for(int i=0;i<m;i++){
+		int uu,vv;
+		cin>>uu>>vv;
+		s.push_back((place){uu,vv});
+	}
+	sort(s.begin(),s.end(),cmp);
+	for(int i=0;i<m;i++){
+		e[s[i].u].push_back(i);
+	}
+	dfs(1);
+	cout<<endl;
+	bfs(1);
+}
