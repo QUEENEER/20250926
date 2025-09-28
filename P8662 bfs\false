@@ -19,7 +19,7 @@ void bfs1(int x,int y){
 		for(int i=0;i<4;i++){
 			int dx=xx+fx[i];
 			int dy=yy+fy[i];
-			if(d[dx][dy]==1&&dx>=1&&dx<=n&&dy>=1&&dy<=n){
+			if(dx>=1&&dx<=n&&dy>=1&&dy<=n&&d[dx][dy]==1){
 				q.push({dx,dy});
 				d[dx][dy]=0;
 			}
@@ -37,7 +37,7 @@ void bfs2(int x,int y){
 		for(int i=0;i<4;i++){
 			int dx=xx+fx[i];
 			int dy=yy+fy[i];
-			if(f[dx][dy]==1&&dx>=1&&dx<=n&&dy>=1&&dy<=n){
+			if(dx>=1&&dx<=n&&dy>=1&&dy<=n&&f[dx][dy]==1){
 				q.push({dx,dy});
 				f[dx][dy]=0;
 			}
